@@ -44,7 +44,7 @@ public abstract class ExtendedGuiContainer extends GuiContainer implements IRoot
         GExt.onResize();
     }
 
-    @Override
+
     public @NotNull IGraphicsLayout<IGraphicsComponent> layout() {
         return layout;
     }
@@ -87,12 +87,14 @@ public abstract class ExtendedGuiContainer extends GuiContainer implements IRoot
         initialClick = true;
     }
 
-    @Override
+/*
     protected void mouseReleased(int mouseX, int mouseY, int mouseButton) {
         super.mouseReleased(mouseX, mouseY, mouseButton);
         layout.onMouseReleased(mouseX, mouseY, mouseButton);
         initialClick = false;
     }
+
+ */
 
     @Override
     public void handleMouseInput() {

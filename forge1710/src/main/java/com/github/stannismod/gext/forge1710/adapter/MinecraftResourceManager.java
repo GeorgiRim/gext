@@ -35,7 +35,7 @@ public class MinecraftResourceManager implements IResourceManager {
     @Override
     public @NotNull IFontRenderer standardRenderer() {
         if (DEFAULT_FONTRENDERER == null) {
-            DEFAULT_FONTRENDERER = new MinecraftFontRenderer(Minecraft.getMinecraft().fontRendererObj);
+            DEFAULT_FONTRENDERER = new MinecraftFontRenderer(Minecraft.getMinecraft().fontRenderer);
         }
         return DEFAULT_FONTRENDERER;
     }

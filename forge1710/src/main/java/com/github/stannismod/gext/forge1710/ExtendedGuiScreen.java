@@ -85,12 +85,14 @@ public abstract class ExtendedGuiScreen extends GuiScreen implements IRootLayout
         initialClick = true;
     }
 
+    /*
     @Override
     protected void mouseReleased(int mouseX, int mouseY, int mouseButton) {
         super.mouseReleased(mouseX, mouseY, mouseButton);
         layout.onMouseReleased(mouseX, mouseY, mouseButton);
         initialClick = false;
     }
+     */
 
     @Override
     public void handleMouseInput() {
