@@ -704,7 +704,7 @@ public class GTextPanel extends GBasic implements IScrollable {
         return getText().get(line).length();
     }
 
-    public static abstract class Builder<SELF extends Builder<?, T>, T extends GTextPanel> extends ComponentBuilder<SELF, T> {
+    public static abstract class BuilderBase extends BaseComponentBuilder<GTextPanel> {
 
         protected String title;
         protected float titleScale = 1.5F;
@@ -734,22 +734,22 @@ public class GTextPanel extends GBasic implements IScrollable {
             }
         }
 
-        @Override
-        protected void afterCreation(final T instance) {
-            super.afterCreation(instance);
-            if (instance.getText().isEmpty()) {
-                instance.getText().add("");
-            }
-        }
+       // @Override
+       // protected void afterCreation(final T instance) {
+       //     super.afterCreation(instance);
+       //     if (instance.getText().isEmpty()) {
+        //        instance.getText().add("");
+        //    }
+        //}
 
-        public SELF title(String title) {
+        public BuilderBase title(String title) {
             this.title = title;
-            return self();
+            return this;
         }
 
-        public SELF titleScale(float titleScale) {
+        public BuilderBase titleScale(float titleScale) {
             this.titleScale = titleScale;
-            return self();
+            return this;
         }
 
         /**
@@ -760,20 +760,20 @@ public class GTextPanel extends GBasic implements IScrollable {
          *
          * @param text given text
          */
-        public SELF text(String text) {
+        public BuilderBase text(String text) {
             this.text = text;
-            return self();
+            return this;
         }
 
-        public SELF textScale(float scale) {
+        public BuilderBase textScale(float scale) {
             this.scale = scale;
-            return self();
+            return this;
         }
 
         /**
          * Fills the panel with containing text AS IS, WITHOUT resize
          */
-        public SELF text(List<String> text) {
+        public BuilderBase text(List<String> text) {
             this.textList = text;
             return wrap();
         }
@@ -790,45 +790,45 @@ public class GTextPanel extends GBasic implements IScrollable {
          * <p>All text adding calls until this moment should
          * initiate the panel size growth</p>
          */
-        public SELF wrap() {
+        public BuilderBase wrap() {
             this.wrapContent = true;
-            return self();
+            return this;
         }
 
-        public SELF scale(float scale) {
+        public BuilderBase scale(float scale) {
             this.scale = scale;
-            return self();
+            return this;
         }
 
-        public SELF offsets(int xOffset, int yOffset) {
+        public BuilderBase offsets(int xOffset, int yOffset) {
             this.xOffset = xOffset;
             this.yOffset = yOffset;
-            return self();
+            return this;
         }
 
-        public SELF enableBackground() {
+        public BuilderBase enableBackground() {
             this.backgroundDrawingEnabled = true;
-            return self();
+            return this;
         }
 
-        public SELF interval(int interval) {
+        public BuilderBase interval(int interval) {
             this.interval = interval;
-            return self();
+            return this;
         }
 
-        public SELF enableSelection() {
+        public BuilderBase enableSelection() {
             this.selectionEnabled = true;
-            return self();
+            return this;
         }
 
-        public SELF renderer(IFontRenderer renderer) {
+        public BuilderBase renderer(IFontRenderer renderer) {
             this.renderer = renderer;
-            return self();
+            return this;
         }
 
-        public SELF scrollHandler(IGraphicsComponentScroll scrollHandler) {
+        public BuilderBase scrollHandler(IGraphicsComponentScroll scrollHandler) {
             this.scrollHandler = scrollHandler;
-            return self();
+            return this;
         }
     }
 }

@@ -26,7 +26,7 @@ import com.github.stannismod.gext.utils.*;
 import java.awt.*;
 import java.util.List;
 
-public class GLabel extends GBasic {
+public class GLabel extends GBasic implements IGraphicsComponent{
 
     protected String text = "";
     protected int color;
@@ -70,7 +70,7 @@ public class GLabel extends GBasic {
         GraphicsHelper.drawScaledString(fontRenderer, text, 0, 0, scale, color);
     }
 
-    public static abstract class Builder<SELF extends Builder<?, T>, T extends GLabel> extends ComponentBuilder<SELF, T> {
+    public static abstract class Builder extends BaseComponentBuilder<GLabel> {
 
         protected String text = "";
         protected int color;
@@ -78,36 +78,37 @@ public class GLabel extends GBasic {
         protected float scale;
         protected boolean centered;
 
-        public SELF renderer(IFontRenderer fontRenderer) {
+        public Builder renderer(IFontRenderer fontRenderer) {
             if (fontRenderer == null) {
                 throw new GInitializationException("FontRenderer instance mustn't be null");
             }
             this.fontRenderer = fontRenderer;
-            return self();
+            return this;
         }
 
-        public SELF text(String text) {
-            return text(text, Color.BLACK.getRGB());
+        public Builder text(String text) {
+            text(text, Color.BLACK.getRGB());
+            return this;
         }
 
-        public SELF text(String text, int color) {
+        public Builder text(String text, int color) {
             if (text == null) {
                 throw new GInitializationException("Given text mustn't be null");
             }
             this.text = text;
             this.color = color;
             scale(1.0F);
-            return self();
+            return this;
         }
 
-        public SELF scale(float scale) {
+        public Builder scale(float scale) {
             this.scale = scale;
-            return self();
+            return this;
         }
 
-        public SELF setCentered() {
+        public Builder setCentered() {
             this.centered = true;
-            return self();
+            return this;
         }
     }
 }

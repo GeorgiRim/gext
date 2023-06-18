@@ -354,21 +354,20 @@ public class BasicLayout<T extends IGraphicsComponent> extends GBasic implements
         this.clear();
     }
 
-    public static abstract class Builder<SELF extends BasicLayout.Builder<?, T>, T extends BasicLayout<? extends IGraphicsComponent>>
-            extends ComponentBuilder<SELF, T> {
+    public static abstract class BuilderBase extends BaseComponentBuilder<BasicLayout> {
 
         protected ISelector selector;
 
-        protected IGraphicsListener<? extends T> tooltip;
+        protected IGraphicsListener tooltip;
 
-        public SELF setSelector(ISelector selector) {
+        public BuilderBase setSelector(ISelector selector) {
             this.selector = selector;
-            return self();
+            return this;
         }
 
-        public SELF setTooltip(IGraphicsListener<? extends T> tooltip) {
+        public BuilderBase setTooltip(IGraphicsListener tooltip) {
             this.tooltip = tooltip;
-            return self();
+            return this;
         }
     }
 }

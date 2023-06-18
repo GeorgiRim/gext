@@ -21,7 +21,7 @@ import com.github.stannismod.gext.api.IGraphicsLayout;
 import com.github.stannismod.gext.api.IListener;
 import com.github.stannismod.gext.utils.Align;
 import com.github.stannismod.gext.utils.Bound;
-import com.github.stannismod.gext.utils.ComponentBuilder;
+import com.github.stannismod.gext.utils.BaseComponentBuilder;
 import com.github.stannismod.gext.utils.StyleMap;
 import org.jetbrains.annotations.NotNull;
 
@@ -172,28 +172,28 @@ public class GVerticalScroll extends GScrollBasic {
         }
     }
 
-    public abstract static class Builder<SELF extends Builder<?, T>, T extends GVerticalScroll> extends ComponentBuilder<SELF, T> {
+    public abstract static class BuilderBase extends BaseComponentBuilder<GVerticalScroll> {
 
         protected int barWidth = 8;
         protected float scrollFactor;
 
-        public SELF barWidth(int width) {
+        public BuilderBase barWidth(int width) {
             this.barWidth = width;
-            return self();
+            return this;
         }
 
-        public SELF scrollFactor(float scrollFactor) {
+        public BuilderBase scrollFactor(float scrollFactor) {
             this.scrollFactor = scrollFactor;
-            return self();
+            return this;
         }
 
         @Override
-        public SELF size(final int width, final int height) {
+        public BuilderBase size(final int width, final int height) {
             throw new UnsupportedOperationException("Sizing GVerticalScroll is forbidden");
         }
 
         @Override
-        public SELF placeAt(final int x, final int y) {
+        public BuilderBase placeAt(final int x, final int y) {
             throw new UnsupportedOperationException("Placing GVerticalScroll is forbidden");
         }
     }

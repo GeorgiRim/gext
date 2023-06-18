@@ -50,19 +50,19 @@ public class GBackground extends GBasic {
 //        //TODO: when resize change x and y
 //    }
 
-    public static abstract class Builder<SELF extends Builder<?, T>, T extends GBackground> extends ComponentBuilder<SELF, T> {
+    public static abstract class BuilderBase extends BaseComponentBuilder<GBackground> {
 
         protected int borderSize = 5;
         protected int cornerSize = 15;
 
-        public SELF border(int thickness) {
+        public BuilderBase border(int thickness) {
             this.borderSize = thickness;
-            return self();
+            return this;
         }
 
-        public SELF corners(int size) {
+        public BuilderBase corners(int size) {
             this.cornerSize = size;
-            return self();
+            return this;
         }
 
         @Override

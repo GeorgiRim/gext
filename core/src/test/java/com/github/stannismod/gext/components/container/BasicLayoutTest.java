@@ -50,7 +50,7 @@ public class BasicLayoutTest extends BaseTest {
                 Graphics.panel(),
                 Graphics.list(),
                 Graphics.tabPanel()
-        ).map(b -> b.size(width, height).placeAt(x, y).build());
+        ).map(b -> (IGraphicsLayout<IGraphicsComponent>) b.size(width, height).placeAt(x, y).build());
     }
 
     @ParameterizedTest

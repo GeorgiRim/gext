@@ -56,7 +56,7 @@ public class GCheckBox extends GBasic {
         checked = !checked;
     }
 
-    public abstract static class Builder<SELF extends Builder<?, T>, T extends GCheckBox> extends ComponentBuilder<SELF, T> {
+    public abstract static class BuilderBase extends BaseComponentBuilder<GCheckBox> {
 
     }
 }

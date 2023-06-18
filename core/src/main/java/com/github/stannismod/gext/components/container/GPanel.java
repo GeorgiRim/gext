@@ -26,7 +26,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-public class GPanel<T extends IGraphicsComponent> extends BasicLayout<T> implements IScrollable {
+public class GPanel<T extends IGraphicsComponent> extends BasicLayout<T> implements IScrollable { //Ну и хуета
 
     private IGraphicsComponentScroll scrollHandler;
     private int scrollVertical;
@@ -207,28 +207,28 @@ public class GPanel<T extends IGraphicsComponent> extends BasicLayout<T> impleme
         super.draw(mouseX, mouseY, partialTicks);
     }
 
-    public static abstract class Builder<SELF extends Builder<?, T>, T extends GPanel<? extends IGraphicsComponent>> extends BasicLayout.Builder<SELF, T> {
+    public static abstract class BuilderBase extends BasicLayout.BuilderBase {
 
         protected int xOffset;
         protected int yOffset;
         protected boolean wrapContent;
         protected IGraphicsComponentScroll scrollHandler;
 
-        public SELF offsets(int xOffset, int yOffset) {
+        public BuilderBase offsets(int xOffset, int yOffset) {
             this.xOffset = xOffset;
             this.yOffset = yOffset;
-            return self();
+            return this;
         }
 
-        public SELF setWrapContent() {
+        public BuilderBase setWrapContent() {
             this.wrapContent = true;
-            return self();
+            return this;
         }
 
-        public SELF scrollHandler(IGraphicsComponentScroll scrollHandler) {
+        public BuilderBase scrollHandler(IGraphicsComponentScroll scrollHandler) {
             assertRight(scrollHandler != null, "Passed scroll handler can't be null");
             this.scrollHandler = scrollHandler;
-            return self();
+            return this;
         }
     }
 }

@@ -22,7 +22,7 @@ import com.github.stannismod.gext.api.IListener;
 import com.github.stannismod.gext.api.resource.ITexture;
 import com.github.stannismod.gext.utils.Align;
 import com.github.stannismod.gext.utils.Bound;
-import com.github.stannismod.gext.utils.ComponentBuilder;
+import com.github.stannismod.gext.utils.BaseComponentBuilder;
 import com.github.stannismod.gext.utils.TextureMapping;
 
 import java.util.List;
@@ -44,27 +44,27 @@ public class GImage extends GBasic {
         mapping.draw(0, 0, getWidth(), getHeight(), 0);
     }
 
-    public static abstract class Builder<SELF extends Builder<?, T>, T extends GImage> extends ComponentBuilder<SELF, T> {
+    public static abstract class BuilderBase extends BaseComponentBuilder<GImage> {
 
         protected TextureMapping mapping;
 
-        public SELF texture(ITexture location) {
+        public BuilderBase texture(ITexture location) {
             return texture(location, 256, 256);
         }
 
-        public SELF texture(ITexture location, int textureWidth, int textureHeight) {
+        public BuilderBase texture(ITexture location, int textureWidth, int textureHeight) {
             this.mapping = new TextureMapping(location);
             this.mapping.setTextureWidth(textureWidth);
             this.mapping.setTextureHeight(textureHeight);
-            return self();
+            return this;
         }
 
-        public SELF uv(int startU, int startV, int u, int v) {
+        public BuilderBase uv(int startU, int startV, int u, int v) {
             this.mapping.setU(startU);
             this.mapping.setV(startV);
             this.mapping.setTextureX(u);
             this.mapping.setTextureY(v);
-            return self();
+            return this;
         }
     }
 }

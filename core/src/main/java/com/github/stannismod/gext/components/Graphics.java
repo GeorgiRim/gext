@@ -17,25 +17,17 @@
 package com.github.stannismod.gext.components;
 
 import com.github.stannismod.gext.api.IGraphicsComponent;
-import com.github.stannismod.gext.api.IGraphicsLayout;
-import com.github.stannismod.gext.api.IListener;
-import com.github.stannismod.gext.api.ISelector;
 import com.github.stannismod.gext.components.container.BasicLayout;
 import com.github.stannismod.gext.components.container.GList;
 import com.github.stannismod.gext.components.container.GPanel;
 import com.github.stannismod.gext.components.container.GTabPanel;
 import com.github.stannismod.gext.components.text.GTextBox;
 import com.github.stannismod.gext.components.text.GTextPanel;
-import com.github.stannismod.gext.utils.Align;
-import com.github.stannismod.gext.utils.Bound;
-
-import javax.tools.Tool;
-import java.util.List;
 
 public class Graphics {
 
-    public static GLabel.Builder<GLabel.Builder<?, GLabel>, GLabel> label() {
-        return new GLabel.Builder<GLabel.Builder<?, GLabel>, GLabel>() {
+    public static GLabel.Builder label() {
+        return new GLabel.Builder() {
             @Override
             protected GLabel create() {
                 return new GLabel(x, y, clippingEnabled, parent, binding, bound, alignment, xPadding, yPadding,
@@ -44,8 +36,8 @@ public class Graphics {
         };
     }
 
-    public static GLink.Builder<GLink.Builder<?, GLink>, GLink> link() {
-        return new GLink.Builder<GLink.Builder<?, GLink>, GLink>() {
+    public static GLink.BuilderBase link() {
+        return new GLink.BuilderBase() {
             @Override
             protected GLink create() {
                 return new GLink(x, y, clippingEnabled, parent, binding, bound, alignment, xPadding, yPadding,
@@ -54,8 +46,8 @@ public class Graphics {
         };
     }
 
-    public static GButton.Builder<GButton.Builder<?, GButton>, GButton> button() {
-        return new GButton.Builder<GButton.Builder<?, GButton>, GButton>() {
+    public static GButton.BuilderBase button() {
+        return new GButton.BuilderBase() {
             @Override
             protected GButton create() {
                 return new GButton(x, y, width, height, clippingEnabled, parent, binding, bound, alignment, xPadding,
@@ -64,8 +56,8 @@ public class Graphics {
         };
     }
 
-    public static GImage.Builder<GImage.Builder<?, GImage>, GImage> image() {
-        return new GImage.Builder<GImage.Builder<?, GImage>, GImage>() {
+    public static GImage.BuilderBase image() {
+        return new GImage.BuilderBase() {
             @Override
             protected GImage create() {
                 return new GImage(x, y, width, height, clippingEnabled, parent, binding, bound, alignment, xPadding,
@@ -74,8 +66,8 @@ public class Graphics {
         };
     }
 
-    public static GBackground.Builder<GBackground.Builder<?, GBackground>, GBackground> background() {
-        return new GBackground.Builder<GBackground.Builder<?, GBackground>, GBackground>() {
+    public static GBackground.BuilderBase background() {
+        return new GBackground.BuilderBase() {
             @Override
             protected GBackground create() {
                 return new GBackground(x, y, width, height, clippingEnabled, parent, binding, bound, alignment,
@@ -84,8 +76,8 @@ public class Graphics {
         };
     }
 
-    public static GTextPanel.Builder<GTextPanel.Builder<?, GTextPanel>, GTextPanel> textPanel() {
-        return new GTextPanel.Builder<GTextPanel.Builder<?, GTextPanel>, GTextPanel>() {
+    public static GTextPanel.BuilderBase textPanel() {
+        return new GTextPanel.BuilderBase() {
             @Override
             protected GTextPanel create() {
                 return new GTextPanel(x, y, width, height, clippingEnabled, parent, binding, bound, alignment, xPadding,
@@ -95,8 +87,8 @@ public class Graphics {
         };
     }
 
-    public static GTextBox.Builder<GTextBox.Builder<?, GTextBox>, GTextBox> textBox() {
-        return new GTextBox.Builder<GTextBox.Builder<?, GTextBox>, GTextBox>() {
+    public static GTextBox.BuilderBase textBox() {
+        return new GTextBox.BuilderBase() {
             @Override
             protected GTextBox create() {
                 return new GTextBox(x, y, width, height, clippingEnabled, parent, binding, bound, alignment, xPadding,
@@ -106,18 +98,18 @@ public class Graphics {
         };
     }
 
-    public static <T extends IGraphicsComponent> BasicLayout.Builder<BasicLayout.Builder<?, BasicLayout<T>>, BasicLayout<T>> layout() {
-        return new BasicLayout.Builder<BasicLayout.Builder<?, BasicLayout<T>>, BasicLayout<T>>() {
+    public static BasicLayout.BuilderBase layout() {
+        return new BasicLayout.BuilderBase() {
             @Override
-            protected BasicLayout<T> create() {
-                return new BasicLayout<>(x, y, width, height, clippingEnabled, parent, binding,
+            protected BasicLayout create() {
+                return new BasicLayout(x, y, width, height, clippingEnabled, parent, binding,
                         bound, alignment, xPadding, yPadding, listeners, tooltip, selector);
             }
         };
     }
 
-    public static <T extends IGraphicsComponent> GPanel.Builder<GPanel.Builder<?, GPanel<T>>, GPanel<T>> panel() {
-        return new GPanel.Builder<GPanel.Builder<?, GPanel<T>>, GPanel<T>>() {
+    public static <T extends IGraphicsComponent> GPanel.BuilderBase panel() {
+        return new GPanel.BuilderBase() {
             @Override
             protected GPanel<T> create() {
                 return new GPanel<>(x, y, width, height, clippingEnabled, parent, binding, bound, alignment,
@@ -126,8 +118,8 @@ public class Graphics {
         };
     }
 
-    public static <T extends IGraphicsComponent> GList.Builder<GList.Builder<?, GList<T>>, GList<T>> list() {
-        return new GList.Builder<GList.Builder<?, GList<T>>, GList<T>>() {
+    public static <T extends IGraphicsComponent> GList.BuilderBase list() {
+        return new GList.BuilderBase() {
             @Override
             protected GList<T> create() {
                 return new GList<>(x, y, width, height, clippingEnabled, parent, binding, bound, alignment,
@@ -137,9 +129,8 @@ public class Graphics {
         };
     }
 
-    public static <K extends IGraphicsComponent, V extends IGraphicsComponent>
-    GTabPanel.Builder<GTabPanel.Builder<?, GTabPanel<K, V>, K, V>, GTabPanel<K, V>, K, V> tabPanel() {
-        return new GTabPanel.Builder<GTabPanel.Builder<?, GTabPanel<K, V>, K, V>, GTabPanel<K, V>, K, V>() {
+    public static <K extends IGraphicsComponent, V extends IGraphicsComponent> GTabPanel.BuilderBase tabPanel() {
+            return new GTabPanel.BuilderBase() {
             @Override
             protected GTabPanel<K, V> create() {
                 return new GTabPanel<>(x, y, width, height, clippingEnabled, parent, binding, bound, alignment,
@@ -149,8 +140,8 @@ public class Graphics {
         };
     }
 
-    public static GCheckBox.Builder<GCheckBox.Builder<?, GCheckBox>, GCheckBox> checkbox() {
-        return new GCheckBox.Builder<GCheckBox.Builder<?, GCheckBox>, GCheckBox>() {
+    public static GCheckBox.BuilderBase checkbox() {
+        return new GCheckBox.BuilderBase() {
             @Override
             protected GCheckBox create() {
                 return new GCheckBox(x, y, width, height, clippingEnabled, parent, binding, bound, alignment,
@@ -159,8 +150,8 @@ public class Graphics {
         };
     }
 
-    public static GProgressBar.Builder<GProgressBar.Builder<?, GProgressBar>, GProgressBar> progressBar() {
-        return new GProgressBar.Builder<GProgressBar.Builder<?, GProgressBar>, GProgressBar>() {
+    public static GProgressBar.BuilderBase progressBar() {
+        return new GProgressBar.BuilderBase() {
             @Override
             protected GProgressBar create() {
                 return new GProgressBar(x, y, width, height, clippingEnabled, parent, binding, bound, alignment,
@@ -169,8 +160,8 @@ public class Graphics {
         };
     }
 
-    public static GRadioButton.Builder<GRadioButton.Builder<?, GRadioButton>, GRadioButton> radioButton() {
-        return new GRadioButton.Builder<GRadioButton.Builder<?, GRadioButton>, GRadioButton>() {
+    public static GRadioButton.BuilderBase radioButton() {
+        return new GRadioButton.BuilderBase() {
             @Override
             protected GRadioButton create() {
                 return new GRadioButton(x, y, width, height, clippingEnabled, parent, binding, bound, alignment,
@@ -179,8 +170,8 @@ public class Graphics {
         };
     }
 
-    public static Tooltip.Builder<Tooltip.Builder<?, Tooltip>, Tooltip> tooltip() {
-        return new Tooltip.Builder<Tooltip.Builder<?, Tooltip>, Tooltip>() {
+    public static Tooltip.BuilderBase tooltip() {
+        return new Tooltip.BuilderBase() {
             @Override
             protected Tooltip create() {
                 return new Tooltip(x, y, width, height, clippingEnabled, parent, binding, bound, alignment,

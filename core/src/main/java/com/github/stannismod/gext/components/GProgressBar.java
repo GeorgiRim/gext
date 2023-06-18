@@ -21,7 +21,7 @@ import com.github.stannismod.gext.api.IGraphicsLayout;
 import com.github.stannismod.gext.api.IListener;
 import com.github.stannismod.gext.utils.Align;
 import com.github.stannismod.gext.utils.Bound;
-import com.github.stannismod.gext.utils.ComponentBuilder;
+import com.github.stannismod.gext.utils.BaseComponentBuilder;
 import com.github.stannismod.gext.utils.StyleMap;
 
 import java.util.List;
@@ -50,7 +50,7 @@ public class GProgressBar extends GBasic {
         StyleMap.current().drawProgressBar(getProgress(), getX(), getY(), getWidth(), getHeight());
     }
 
-    public static abstract class Builder<SELF extends Builder<?, T>, T extends GProgressBar> extends ComponentBuilder<SELF, T> {
+    public static abstract class BuilderBase extends BaseComponentBuilder<GProgressBar> {
 
     }
 }

@@ -290,7 +290,7 @@ public class GTextBox extends GTextPanel {
                 .build();
     }
 
-    public static abstract class Builder<SELF extends Builder<?, T>, T extends GTextBox> extends GTextPanel.Builder<SELF, T> {
+    public static abstract class BuilderBase extends GTextPanel.BuilderBase {
         
     }
 }

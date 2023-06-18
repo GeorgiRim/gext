@@ -479,4 +479,41 @@ public interface IGraphicsComponent {
     default boolean intersectsInner(int innerMouseX, int innerMouseY) {
         return intersects(innerMouseX + getX(), innerMouseY + getY());
     }
+    abstract class Builder{
+        public static Builder placeAt(int x, int y, int depth){return null;}
+
+        public static Builder size(int width, int height) {return null;
+        }
+
+        public static Builder visibility(boolean visibility) {
+            return null;
+        }
+
+        public static Builder bind(IGraphicsComponent binding, Bound bound) {
+            return null;
+        }
+
+        public static Builder setClipping(boolean clippingEnabled) {
+            return null;
+        }
+
+        public static Builder addListener(IListener listener) {
+            return null;
+        }
+
+        public static Builder padding(int xPadding, int yPadding) {
+            return null;
+        }
+
+        public static <T extends IGraphicsComponent> Builder parent(IGraphicsLayout<T> parent) {
+            return null;
+        }
+
+        public static Builder alignment(Align xAlignment, Align yAlignment) {
+            return null;
+        }
+
+        public <T extends IGraphicsComponent> T build() {return null;
+        }
+    }
 }

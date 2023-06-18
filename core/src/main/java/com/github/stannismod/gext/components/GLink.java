@@ -110,36 +110,37 @@ public class GLink extends GLabel {
         }
     }
 
-    public static abstract class Builder<SELF extends Builder<?, T>, T extends GLink> extends GLabel.Builder<SELF, T> {
+    public static abstract class BuilderBase extends GLabel.BuilderBase {
         protected URI uri;
         protected int activeColor;
         protected int inactiveColor;
 
         @Override
-        public SELF text(@NotNull String text) {
+        public BuilderBase text(@NotNull String text) {
             this.text = text;
-            return scale(1.0F);
+            scale(1.0F);
+            return this;
         }
 
         @Override
         @Contract("_, _ -> fail")
-        public SELF text(@NotNull String text, int color) {
+        public BuilderBase text(@NotNull String text, int color) {
             throw new UnsupportedOperationException("For drawing link with color use Builder#color(activeColor, inactiveColor)");
         }
 
-        public SELF url(@NotNull String url) {
+        public BuilderBase url(@NotNull String url) {
             this.uri = URI.create(url);
-            return self();
+            return this;
         }
 
-        public SELF color(int color) {
+        public BuilderBase color(int color) {
             return color(color, color);
         }
 
-        public SELF color(int activeColor, int inactiveColor) {
+        public BuilderBase color(int activeColor, int inactiveColor) {
             this.activeColor = activeColor;
             this.inactiveColor = inactiveColor;
-            return self();
+            return this;
         }
     }
 }

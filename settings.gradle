@@ -1,4 +1,4 @@
-rootProject.name = 'GExt'
+rootProject.name = 'GExt1'
 
 include ':api'
 include ':core'

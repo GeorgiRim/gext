@@ -18,8 +18,8 @@ package com.github.stannismod.gext.components;
 
 public class Controls {
 
-    public static GVerticalScroll.Builder<GVerticalScroll.Builder<?, GVerticalScroll>, GVerticalScroll> verticalScroll() {
-        return new GVerticalScroll.Builder<GVerticalScroll.Builder<?, GVerticalScroll>, GVerticalScroll>() {
+    public static GVerticalScroll.BuilderBase verticalScroll() {
+        return new GVerticalScroll.BuilderBase() {
             @Override
             protected GVerticalScroll create() {
                 return new GVerticalScroll(x, y, width, height, clippingEnabled, parent, binding, bound, alignment,

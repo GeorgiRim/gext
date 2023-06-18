@@ -27,7 +27,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+/// TODO: 18.06.2023 НУ и хуета
 public class GTabPanel<K extends IGraphicsComponent, V extends IGraphicsComponent> extends GList<K> implements ISelector {
 
     private static final LayoutContent<? extends IGraphicsComponent> EMPTY_CONTENT = LayoutContent.create();
@@ -124,24 +124,23 @@ public class GTabPanel<K extends IGraphicsComponent, V extends IGraphicsComponen
         this.deselectionEnabled = deselectionEnabled;
     }
 
-    public static abstract class Builder<SELF extends Builder<?, T, K, V>, T extends GTabPanel<K, V>,
-            K extends IGraphicsComponent, V extends IGraphicsComponent> extends GList.Builder<SELF, GTabPanel<K, V>> {
+    public static abstract class BuilderBase extends GList.BuilderBase {
 
-        protected IGraphicsLayout<V> target;
-        protected final Map<String, LayoutContent<V>> contentMap = new HashMap<>();
+        protected IGraphicsLayout target;
+        protected final Map<String, LayoutContent<IGraphicsComponent>> contentMap = new HashMap<>();
         protected boolean deselectionEnabled;
 
-        public SELF target(IGraphicsLayout<V> target) {
+        public BuilderBase target(IGraphicsLayout<IGraphicsComponent> target) {
             this.target = target;
-            return self();
+            return this;
         }
 
-        public SELF setContentMap(Map<String, Map<String, V>> contentMap) {
+        public BuilderBase setContentMap(Map<String, Map<String, IGraphicsComponent>> contentMap) {
             contentMap.forEach(this::putContent);
-            return self();
+            return this;
         }
 
-        public SELF putContent(String selectedId, V component) {
+        public BuilderBase putContent(String selectedId, IGraphicsComponent component) {
             this.contentMap.compute(selectedId, (key, value) -> {
                 if (value == null) {
                     value = LayoutContent.create();
@@ -149,17 +148,17 @@ public class GTabPanel<K extends IGraphicsComponent, V extends IGraphicsComponen
                 value.putComponent(component);
                 return value;
             });
-            return self();
+            return this;
         }
 
-        public SELF putContent(String selectedId, Map<String, V> content) {
+        public BuilderBase putContent(String selectedId, Map<String, IGraphicsComponent> content) {
             this.contentMap.put(selectedId, LayoutContent.withContent(content));
-            return self();
+            return this;
         }
 
-        public SELF enableDeselection() {
+        public BuilderBase enableDeselection() {
             this.deselectionEnabled = true;
-            return self();
+            return this;
         }
     }
 }

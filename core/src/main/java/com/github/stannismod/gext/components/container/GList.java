@@ -120,25 +120,25 @@ public class GList<T extends IGraphicsComponent> extends GPanel<T> {
         super.draw(mouseXIn, mouseYIn, partialTicks);
     }
 
-    public static abstract class Builder<SELF extends Builder<?, T>, T extends GList<?>> extends GPanel.Builder<SELF, T> {
+    public static abstract class BuilderBase extends GPanel.BuilderBase {
 
         protected TextureMapping background;
         protected boolean drawBackground;
         protected int interval;
 
-        public SELF background(TextureMapping background) {
+        public BuilderBase background(TextureMapping background) {
             this.background = background;
-            return self();
+            return this;
         }
 
-        public SELF enableBackground() {
+        public BuilderBase enableBackground() {
             this.drawBackground = true;
-            return self();
+            return this;
         }
 
-        public SELF interval(int interval) {
+        public BuilderBase interval(int interval) {
             this.interval = interval;
-            return self();
+            return this;
         }
     }
 }

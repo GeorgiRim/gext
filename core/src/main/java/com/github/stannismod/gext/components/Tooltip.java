@@ -22,7 +22,7 @@ import com.github.stannismod.gext.api.IListener;
 import com.github.stannismod.gext.api.ISelector;
 import com.github.stannismod.gext.utils.Align;
 import com.github.stannismod.gext.utils.Bound;
-import com.github.stannismod.gext.utils.ComponentBuilder;
+import com.github.stannismod.gext.utils.BaseComponentBuilder;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -56,23 +56,23 @@ public class Tooltip extends GTooltip {
         ((GLabel) getParent().getComponent(labelId)).text = "Secondary text";
         setVisibility(true);
     }
-    public static abstract class Builder<SELF extends Tooltip.Builder<?, T>, T extends Tooltip> extends ComponentBuilder<SELF, T> {
+    public static abstract class BuilderBase extends BaseComponentBuilder<Tooltip> {
         protected ISelector selector;
         protected int buildXOffset;
         protected int buildYOffset;
-        public SELF selector(ISelector selector) {
+        public BuilderBase selector(ISelector selector) {
             this.selector = selector;
-            return self();
+            return this;
         }
 
-        public SELF xOffset(int offset) {
+        public BuilderBase xOffset(int offset) {
             this.buildXOffset = offset;
-            return self();
+            return this;
         }
 
-        public SELF yOffset(int offset) {
+        public BuilderBase yOffset(int offset) {
             this.buildYOffset = offset;
-            return self();
+            return this;
         }
     }
 }

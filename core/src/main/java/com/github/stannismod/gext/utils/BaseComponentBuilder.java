@@ -28,12 +28,12 @@ import java.util.List;
 /**
  * The generalization of component builders.
  * Every builder should extend this to provide convenient usage.
- * @param <SELF> the pointer to the end implementation. By default, declared in {@link Graphics}
+ .* @param <SELF> the pointer to the end implementation. By default, declared in {@link Graphics}
  * @param <T> the pointer to the target type that should be built. By default, declared in {@link Graphics}
  * @since 1.3
  */
-@SuppressWarnings("unchecked")
-public abstract class ComponentBuilder<SELF extends ComponentBuilder<?, T>, T extends IGraphicsComponent> {
+//@SuppressWarnings("unchecked")
+public abstract class BaseComponentBuilder<T extends IGraphicsComponent> {
 
     protected int x;
     protected int y;
@@ -56,7 +56,7 @@ public abstract class ComponentBuilder<SELF extends ComponentBuilder<?, T>, T ex
 
     protected Align alignment = Alignment.FIXED;
 
-    public ComponentBuilder() {}
+    public BaseComponentBuilder() {}
 
     /**
      * Constructs the end implementation of target component
@@ -102,7 +102,7 @@ public abstract class ComponentBuilder<SELF extends ComponentBuilder<?, T>, T ex
     public T build() {
         testBuildParameters();
 
-        T instance = create();
+        T instance =  create();
 
         afterCreation(instance);
         return instance;
@@ -111,73 +111,74 @@ public abstract class ComponentBuilder<SELF extends ComponentBuilder<?, T>, T ex
     /**
      * Returns {@code this} cast to the right type
      */
-    protected SELF self() {
-        return (SELF) this;
+    protected BaseComponentBuilder<T> self() {
+        return this;
     }
 
-    public SELF padding(int xPadding, int yPadding) {
+    public T.Builder padding(int xPadding, int yPadding) {
         this.xPadding = xPadding;
         this.yPadding = yPadding;
-        return self();
+        return T.Builder.padding(xPadding,yPadding);
     }
 
-    public SELF alignment(Align alignment) {
+    public T.Builder alignment(Align alignment) {
         return alignment(alignment, alignment);
     }
 
-    public SELF alignment(Align xAlignment, Align yAlignment) {
+    public T.Builder alignment(Align xAlignment, Align yAlignment) {
         this.alignment = new Alignment.Compose(xAlignment, yAlignment);
-        return self();
+        return T.Builder.alignment(xAlignment, yAlignment);
     }
 
-    public SELF parent(IGraphicsLayout<T> parent) {
+    public T.Builder parent(IGraphicsLayout<T> parent) {
         this.parent = parent;
-        return self();
+        return T.Builder.parent(parent);
     }
 
-    public SELF addListener(IListener listener) {
+    public T.Builder addListener(IListener listener) {
         this.listeners.add(listener);
-        return self();
+        return T.Builder.addListener(listener);
     }
 
-    public SELF setClipping(boolean clippingEnabled) {
+    public T.Builder setClipping(boolean clippingEnabled) {
         this.clippingEnabled = clippingEnabled;
-        return self();
+        return T.Builder.setClipping(clippingEnabled);
     }
 
-    public SELF bind(IGraphicsComponent binding) {
+    public T.Builder bind(IGraphicsComponent binding) {
         return bind(binding, Bound.LEFT_TOP);
     }
 
-    public SELF bind(IGraphicsComponent binding, Bound bound) {
+    public T.Builder bind(IGraphicsComponent binding, Bound bound) {
         this.binding = binding;
         this.bound = bound;
-        return self();
+        return T.Builder.bind(binding,bound);
     }
 
-    public SELF visibility(boolean visibility) {
+    public T.Builder visibility(boolean visibility) {
         this.visibility = visibility;
-        return self();
+        return T.Builder.visibility(visibility);
     }
 
-    public SELF size(int width, int height) {
+    public T.Builder size(int width, int height) {
         this.width = width;
         this.height = height;
-        return self();
+        return T.Builder.size(width,height);
     }
 
-    public SELF placeAt(int x, int y) {
-        return placeAt(x, y, 0);
+    public T.Builder placeAt(int x, int y) {
+        placeAt(x, y, 0);
+        return T.Builder.placeAt(x,y,0);
     }
 
-    public SELF placeAt(int x, int y, int depth) {
+    public T.Builder placeAt(int x, int y, int depth) {
         this.x = x;
         this.y = y;
         this.depth = depth;
-        return self();
+        return T.Builder.placeAt(x,y,depth);
     }
 
-    @SuppressWarnings("ConstantConditions")
+    //@SuppressWarnings("ConstantConditions")
     protected static boolean assertNotRight(boolean value, String exceptionMessage) {
         return !assertRight(!value, exceptionMessage);
     }

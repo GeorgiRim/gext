@@ -156,53 +156,55 @@ public class GButton extends GBasic {
         }
     }
 
-    public static abstract class Builder<SELF extends Builder<?, T>, T extends GButton> extends ComponentBuilder<SELF, T> {
+    public static abstract class BuilderBase extends BaseComponentBuilder<GButton> {
 
         protected TextureMapping mapping;
-        @SuppressWarnings("unchecked")
         protected Consumer<GButton>[] action = new Consumer[3];
         protected GLabel label;
 
-        public SELF texture(ITexture location) {
+        public BuilderBase texture(ITexture location) {
             return texture(location, 256, 256);
         }
 
-        public SELF texture(ITexture location, int textureWidth, int textureHeight) {
+        public BuilderBase texture(ITexture location, int textureWidth, int textureHeight) {
             this.mapping = new TextureMapping(location);
             this.mapping.setTextureWidth(textureWidth);
             this.mapping.setTextureHeight(textureHeight);
-            return self();
+            return this;
         }
 
-        public SELF uv(int startU, int startV, int u, int v) {
+        public BuilderBase uv(int startU, int startV, int u, int v) {
             this.mapping.setU(startU);
             this.mapping.setV(startV);
             this.mapping.setTextureX(u);
             this.mapping.setTextureY(v);
-            return self();
+            return this;
         }
 
-        public SELF action(Consumer<GButton> listener) {
+        public BuilderBase action(Consumer<GButton> listener) {
             return action(1, listener);
         }
 
-        public SELF action(int button, Consumer<GButton> listener) {
+        public BuilderBase action(int button, Consumer<GButton> listener) {
             this.action[button] = listener;
-            return self();
+            return this;
         }
 
-        public SELF label(String label) {
+        public BuilderBase label(String label) {
             return label(label, Color.BLACK.getRGB());
         }
 
-        public SELF label(String label, int color) {
-            return label(Graphics.label().text(label, color).setCentered().build());
+        public BuilderBase label(String label, int color) {
+            return label(Graphics.label()
+                    .text(label, color)
+                    .setCentered()
+                    .build());
         }
 
-        public SELF label(GLabel label) {
+        public BuilderBase label(GLabel label) {
             this.label = label;
             label.setClippingEnabled(false);
-            return self();
+            return this;
         }
 
         private void setupLabel() {
@@ -219,7 +221,7 @@ public class GButton extends GBasic {
             return !Arrays.stream(action).allMatch(Objects::isNull);
         }
 
-        public T build() {
+        public GButton build() {
             if (!this.hasAnyAction()) {
                 GExt.warn("GButton was built without an action. It can be inferred statement, but in most cases indicates a broken component");
             }

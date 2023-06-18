@@ -117,21 +117,21 @@ public class GRadioButton extends GBasic {
         }
     }
 
-    public static abstract class Builder<SELF extends Builder<?, T>, T extends GRadioButton> extends ComponentBuilder<SELF, T> {
+    public static abstract class BuilderBase extends BaseComponentBuilder<GRadioButton> {
 
         protected int interval;
         protected int checkBoxOffset;
         protected int checkBoxSize = 8;
 
-        public SELF checkBox(int size, int offset) {
+        public BuilderBase checkBox(int size, int offset) {
             this.checkBoxSize = size;
             this.checkBoxOffset = offset;
-            return self();
+            return this;
         }
 
-        public SELF interval(int interval) {
+        public BuilderBase interval(int interval) {
             this.interval = interval;
-            return self();
+            return this;
         }
     }
 }

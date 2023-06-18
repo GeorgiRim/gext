@@ -3,6 +3,7 @@ package com.github.stannismod.gext.components;
 import com.github.stannismod.gext.BaseTest;
 import com.github.stannismod.gext.api.IGraphicsComponent;
 import com.github.stannismod.gext.api.IGraphicsLayout;
+import com.github.stannismod.gext.components.container.GPanel;
 import org.junit.jupiter.api.Test;
 
 public class GBackgroundTest extends BaseTest {
@@ -10,7 +11,10 @@ public class GBackgroundTest extends BaseTest {
     @Test
     void testCenteringBasic() {
         GBackground component = Graphics.background().build();
-        IGraphicsLayout<IGraphicsComponent> layout = Graphics.panel().placeAt(0, 0).size(0, 0).build();
+        GPanel<IGraphicsComponent> layout = Graphics.panel()
+                .placeAt(0, 0)
+                .size(0, 0)
+                .build();
         component.setParent(layout);
         assert component.getX() == 0 && component.getY() == 0;
     }
